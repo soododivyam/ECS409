@@ -1,0 +1,36 @@
+#Date: 2026-08-30
+#By: Divyam Sood; 23112
+#Problem 4 of Assignment
+#I am assuming question has a typo and one of the value is stored in $t0
+
+#We may not use mul/div but we can use sll and srl which equate to multiplication and division by powers of 2.
+
+
+.data
+A: .word 10000000
+B: .word 222
+C: .word 3
+D: .word 40
+
+.globl main
+.text
+main:
+lw $t0, A
+lw $t1, B
+lw $t2, C
+lw $t3, D
+
+#calculate A/8 + B/4 + C/2 + D/2
+srl $t0, $t0, 3
+srl $t1, $t1, 2
+srl $t2, $t2, 1
+srl $t3, $t3, 1
+add $t4, $t0, $t1
+add $t4, $t4, $t2
+add $t4, $t4, $t3 #$t4 now has the sum
+move $a0, $t4 #Copying to a0 as per instructions.
+
+
+
+li $v0, 17 #calling exit2 syscall
+syscall

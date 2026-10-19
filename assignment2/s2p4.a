@@ -1,0 +1,52 @@
+#2026-09-09
+#By: Divyam Sood
+#Hamming distance := number of positions where two strings of equal length differ
+#Here string length is guaranteed 2
+
+.globl main
+.text
+
+main:
+
+#get string 1
+li $v0, 4
+la $a0, s1
+syscall
+li $v0, 8	
+la $a0, str1
+li $a1, 10
+syscall
+
+#get string 2
+li $v0, 4
+la $a0, s2
+syscall
+li $v0, 8	
+la $a0, str2
+li $a1, 10
+syscall
+
+
+#comparing
+lb $t1, str1
+lb $t2, str2
+sne $t3, $t1, $t2
+
+lb $t1, str1+1
+lb $t2, str2+1
+sne $t4, $t1, $t2
+
+add $t0, $t3, $t4
+move $a0, $t0
+li $v0, 1
+syscall
+
+# exit program
+li	$v0, 10			# system call code for exit = 10
+syscall				# call operating system
+
+.data
+s1: .asciiz "String 1:"
+s2: .asciiz "String 2:"
+str1: .space 10
+str2: .space 10

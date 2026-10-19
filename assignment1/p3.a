@@ -1,0 +1,27 @@
+#Date: 2026-08-30
+#By: Divyam Sood; 23112
+#Problem 3 of Assignment
+
+.data
+RA: .word 69
+RB: .word 67
+
+.globl main
+.text
+main:
+lw $t0, RA
+lw $t1, RB
+#or $t3, $t1, $t0
+or $t2, $t0, $zero #Storing an extra copy of the value. constant extra space needed.
+or $t0, $t0, $t1
+and $t0, $t0, $t1
+or $t1, $t2, $t1
+and $t1, $t1, $t2
+and $t2, $t2, $zero #Just for cleaning up
+
+
+
+
+
+li $v0, 10 # Sets $v0 to "10" to select exit syscall
+syscall

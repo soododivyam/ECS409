@@ -1,0 +1,64 @@
+#Date: 2026-09-12
+#By: Divyam Sood
+#Marks Range
+
+.data
+input: .asciiz "Enter your marks (out of 100):"
+a: .asciiz "Grade A assigned"
+b_b: .asciiz "Grade B assigned"
+c: .asciiz "Grade C assigned"
+f: .asciiz "Grade F assigned"
+
+.globl main
+.text
+
+main:
+	li $v0, 4
+	la $a0, input
+	syscall
+	li $v0, 6
+	syscall
+	li.s $f2, 80.0
+	c.lt.s $f0, $f2
+	bc1f grade_a
+	#Here means score less than 80
+	li.s $f2, 60.0
+	c.lt.s $f0, $f2
+	bc1f grade_b
+	#Here means score less than 60
+	li.s $f2, 40.0
+	c.lt.s $f0, $f2
+	bc1f grade_c
+	#Here means score less than 40
+	beq $zero, $zero, grade_f
+	
+	
+	
+grade_a:
+	la $a0, a
+	li $v0, 4
+	syscall
+	beq $zero, $zero, end
+	
+grade_b:
+	la $a0, b_b
+	li $v0, 4
+	syscall
+	beq $zero, $zero, end
+	
+grade_c:
+	la $a0, c
+	li $v0, 4
+	syscall
+	beq $zero, $zero, end
+	
+grade_f:
+	la $a0, f
+	li $v0, 4
+	syscall
+	beq $zero, $zero, end
+	
+end:
+	# exit program
+	li	$v0, 10			# system call code for exit = 10
+	syscall				# call operating system

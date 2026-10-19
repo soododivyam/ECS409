@@ -1,0 +1,36 @@
+#2026-09-09
+#By: Divyam Sood
+#2nd character
+
+.globl main
+.text
+
+main:
+
+la $a0, username
+li $a1, 10
+li $v0, 8	
+syscall
+
+move $t0, $a0 #Saving name
+
+la $t0, username
+lbu $t1, 1($t0)
+
+la $a0, greet
+li $v0, 4
+syscall
+
+#Print character
+li $v0, 11
+move $a0, $t1
+syscall
+
+# exit program
+li	$v0, 10			# system call code for exit = 10
+syscall				# call operating system
+
+.data
+username: .space 10 #Without directives like this, not sure how to implement
+hi: .ascii "Hi "
+greet: .asciiz "Second character is: "

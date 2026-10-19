@@ -1,0 +1,35 @@
+#2026-09-09
+#By: Divyam Sood
+#Hello User
+
+.globl main
+.text
+
+main:
+
+la $a0, username
+li $a1, 30
+li $v0, 8	
+syscall
+
+move $t0, $a0 #Saving name
+
+#printing one by one
+la $a0, hi
+li $v0, 4
+syscall
+move $a0, $t0
+li $v0, 4
+syscall
+la $a0, greet
+li $v0, 4
+syscall
+
+# exit program
+li	$v0, 10			# system call code for exit = 10
+syscall				# call operating system
+
+.data
+username: .space 30 #Without directives like this, not sure how to implement
+hi: .asciiz "Hi "
+greet: .asciiz ", MIPS assembly programming is very exciting to learn"

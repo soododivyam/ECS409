@@ -1,0 +1,20 @@
+#Date: 2026-09-13
+#By: Divyam Sood
+#Compare two numbers
+
+.data
+n1: .asciiz "Enter first number:"
+n2: .asciiz "Enter second number:"
+
+.globl main
+.text
+
+main:
+	la $a0, n1
+	li $v0, 4
+	syscall
+	mov.s $f1, $f0
+	la $a0, n2
+	li $v0, 4
+	syscall
+	

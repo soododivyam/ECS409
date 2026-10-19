@@ -1,0 +1,44 @@
+#Date: 2026-08-29
+#By: Divyam Sood; 23112
+#Problem 2 of assignment
+
+.data
+A: .word 0
+B: .word 1
+
+.globl main
+.text
+main:
+
+#Half Adder for 2 1 bit numbers
+#SUM = A XOR B
+#CARRY = A AND B
+lw $t0, A
+lw $t1, B
+and $s2, $t0, $t1 #This is carry but
+
+#XOR = (A.!B) + (!A.B)
+nor $t2, $t0, $t0 #!A
+nor $t3, $t1, $t1 #!B 
+and $t4, $t0, $t3
+and $t5, $t1, $t2
+or $s1, $t5, $t4 #This is sum bit
+
+#Half Subtractor (we are calculating A-B)
+#$s1 also stores the difference since sum and difference are the same
+
+#Instead of carry, we should calculate borrow
+#Truth Table for subtractor
+#A	B	A-B(difference, borrow)
+#0	0	(0,0)
+#0	1	(1,1)
+#1	0	(1,0)
+#1	1	(0,0)
+
+#Borrow = !A.B
+and $s3, $t2, $t1
+
+
+
+li $v0, 10 # Sets $v0 to "10" to select exit syscall
+syscall

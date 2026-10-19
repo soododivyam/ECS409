@@ -1,0 +1,78 @@
+#2026-09-09
+#By: Divyam Sood
+#Simple Interest
+
+.globl main
+.text
+
+main:
+la $a0, wel
+li $v0, 4
+syscall
+
+la $a0, p
+li $v0, 4
+syscall
+li $v0, 5
+syscall
+sw $v0, temp
+l.s $f1, temp
+cvt.s.w $f1, $f1
+
+la $a0, r
+li $v0, 4
+syscall
+li $v0, 6
+syscall
+
+la $a0, t
+li $v0, 4
+syscall
+li $v0, 5
+syscall
+sw $v0, temp
+l.s $f2, temp
+cvt.s.w $f2, $f2
+
+mul.s $f2, $f2, $f1
+mul.s $f2, $f2, $f0
+li.s $f1, 100.0
+div.s $f2, $f2, $f1
+
+la $a0, raw
+li $v0, 4
+syscall
+mov.s $f12, $f2
+li $v0, 2
+syscall
+la $a0, new
+li $v0, 4
+syscall
+
+la $a0, cooked
+li $v0, 4
+syscall
+abs.s $f2, $f2
+mov.s $f12, $f2
+li $v0, 2
+syscall
+la $a0, new
+li $v0, 4
+syscall
+
+# exit program
+li	$v0, 10			# system call code for exit = 10
+syscall				# call operating system
+
+
+
+
+.data
+wel: .asciiz "Welcome to simple interest calculator \n"
+p: .asciiz "Enter principal amount (integer)"
+r: .asciiz "Enter rate of interest p.a (in %)"
+t: .asciiz "Enter number of years (integer)"
+temp: .word 0
+raw: .asciiz "Raw value of SI is: "
+cooked: .asciiz "Absolute value of SI is: "
+new: .asciiz "\n"

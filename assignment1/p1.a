@@ -1,0 +1,56 @@
+#2026-08-24
+#By: Divyam Sood; 23112
+#Problem 1 of Assignment
+
+.globl main 
+.text
+
+main:
+lw $t1, aap
+lw $t2, na
+lw $t3, d
+mul $t4, $t3, 7
+add $s0, $t4, $t1 #$s0 stores the 8th term of AP 
+
+#Directly using the formula of sum of first n terms of AP
+lb $t6, sa
+#div $t7, $t6, 2 #Instruction Working but not allowed
+li $t9, 2	
+div $t6, $t9
+mflo $t7
+mul $t1, $t1, 2 #2a calculated
+addi $t8, $t6, -1 
+mul $t8, $t8, $t3 
+add $t1, $t1, $t8
+mul $s1, $t7, $t1 #$s1 stores the sum of AP
+
+lw $t1, agp
+lw $t2, ng
+lw $t3, r
+mul $t4, $t3, $t3
+mul $t4, $t4, $t3 #r^3 calculated
+mul $s3, $t4, $t1 #$s3 stores the 4th term of GP
+
+addi $t0, $t3, -1 #calulate (r-1)
+#div $t1, $t1, $t0 #calculate a/(r-1)
+div $t1, $t0
+mflo $t1
+mul $t4, $t4, $t3 #Because we already have r^3, we may reuse it instead of calculating it again.
+addi $t4, $t4, -1
+mul $s4, $t1, $t4 #$s4 now stores the result of sum of GP
+
+
+li $v0, 10 # Sets $v0 to "10" to select exit syscall
+syscall
+
+
+
+.data
+aap: .word 1
+agp: .word 4
+d: .word 10
+r: .word 2
+na: .word 8
+ng: .word 4
+sa: .byte 6
+sg: .byte 4

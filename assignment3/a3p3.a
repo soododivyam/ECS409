@@ -1,0 +1,104 @@
+#Date: 2026-09-11
+#By: Divyam Sood
+#Exam Eligibility
+
+.data
+name: .space 20
+tot: .word 0
+num: .word 0
+p1: .asciiz "Enter your name please:"
+p2: .asciiz "Enter total number of classes:"
+p3: .asciiz "Enter number of classes you attended:"
+sorry: .asciiz "You cannot attend more classes than total classes!"
+pass: .asciiz " is allowed to sit in the exam"
+fail: .asciiz " is not allowed to sit in the exam"
+newline: .asciiz "\n"
+
+.globl main
+.text
+
+main:
+	#Get player name
+	li $v0, 4
+	la $a0, p1
+	syscall
+	li $a1, 21
+	la $a0, name
+	li $v0, 8
+	syscall
+	
+
+	#now to remove the enter character (ASCII 10) from input
+	la $t7, name
+	li $s1, 10
+	
+remove:
+	addi $t7, $t7, 1
+	lb $t6, 0($t7)
+	bne $t6, $s1, remove
+	beq $zero, $zero, continue
+	
+	
+continue:
+	sb $zero, 0($t7) #change the \n character
+	#Get total classes
+	li $v0, 4
+	la $a0, p2
+	syscall
+	li $v0, 5
+	syscall
+	move $t0, $v0
+	#$t0 now has total classes
+
+	#Get attended classes
+	li $v0, 4
+	la $a0, p3
+	syscall
+	li $v0, 5
+	syscall
+	move $t1, $v0
+	#$t1 now has attended classes
+
+	bgt $t1, $t0, fool #Case of total classes less than attended
+
+	li $t3, 100
+	mul $t1, $t3, $t1
+	div $t1, $t0
+	mflo $t2 #Quotient
+	mfhi $t4 #Remainder
+	li $t6, 75
+	bge $t2, $t6, yes
+	blt $t2, $t6, no
+
+
+
+yes:
+	li $v0, 4
+	la $a0, name
+	syscall
+	li $v0, 4
+	la $a0, pass
+	syscall
+	beq $zero, $zero, end
+
+no:
+	li $v0, 4
+	la $a0, name
+	syscall
+	li $v0, 4
+	la $a0, fail
+	syscall
+	beq $zero, $zero, end
+
+fool:
+	li $v0, 4
+	la $a0, sorry
+	syscall
+	beq $zero, $zero, end
+
+end:
+	# exit program
+	li	$v0, 10			# system call code for exit = 10
+	syscall				# call operating system
+
+
