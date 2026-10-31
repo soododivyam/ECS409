@@ -1,0 +1,25 @@
+Welcome to matrix multiplication. Please note that everything will be done in row major form.Please enter the 9 numbers of first matrix:
+[stdin double] 1
+[stdin double] 0
+[stdin double] 0
+[stdin double] 0
+[stdin double] 1
+[stdin double] 0
+[stdin double] 0
+[stdin double] 0
+[stdin double] 1
+Please enter the 9 numbers of second matrix:
+[stdin double] 324
+[stdin double] 23.4
+[stdin double] 23.52315
+[stdin double] 2315577
+[stdin double] 8675
+[stdin double] -87.56
+[stdin double] 45
+[stdin double] 67
+[stdin double] 54
+Starting with the multiplication.........
+|1 0 0 |	|324 23.4 23.52315 |	|324 23.4 23.52315 |
+|0 1 0 |	|2315577 8675 -87.56 |	|2315577 8675 -87.56 |
+|0 0 1 |	|45 67 54 |	|45 67 54 |
+=== Program finished ===
