@@ -1,20 +1,20 @@
 .data
 A: .asciiz "Amrit"
 B: .asciiz "Bobby"
-C: .asciiz "Chudan"
-D: .asciiz "Devar"
+C: .asciiz "Charlie"
+D: .asciiz "Divyam"
 E: .asciiz "Eashna"
 F: .asciiz "Fathima"
 names: .word A, B, C, D, E, F
-marks: .word 1, 2, 3, 4, 
- .word 11, 12, 13, 14, 
- .word 21, 22, 23, 24,
- .word 31, 32, 33, 34, 
- .word 41, 42, 43, 44,
+marks: .word 1, 2, 3, 4 
+ .word 11, 12, 13, 14 
+ .word 21, 22, 23, 24
+ .word 31, 32, 33, 34 
+ .word 41, 42, 43, 44
  .word 51, 52, 53, 54
 
 prompt: .asciiz "Enter Student Name:"
-no_love: .asciiz "Student name is not matched"
+no_love: .asciiz "Student name is not matched\n"
 marks_is: .asciiz "The marks of student is as follows:\n"
 phy: .asciiz "Physics: "
 chm: .asciiz "Chemistry: "
@@ -147,7 +147,6 @@ j bye
 bye:
 li $v0, 10
 syscall
-
 
 
 
