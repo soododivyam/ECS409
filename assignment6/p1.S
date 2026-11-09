@@ -7,6 +7,8 @@ int1: .asciiz "Enter the first integer please:"
 int2: .asciiz "Enter the second integer please:"
 store: .asciiz "The integers are stored at $s0 and $s1. Please see the registers to see them being swapped."
 mess: .asciiz "Integers have been swapped, please check."
+s0: .asciiz "\n\nRight now, value of $s0 is "
+s1: .asciiz "\nRight now, value of $s1 is "
 
 .text
 .globl _start
@@ -26,16 +28,37 @@ li $v0, 5
 syscall
 move $s1, $v0
 
+jal print
+
 #jal temp
+jal print
 
 #jal add_sub
+jal print
 
 #jal mul_div
+jal print
 
-#jal bitwise
+jal bitwise
+jal print
 
 li $v0, 10
 syscall
+
+print:
+	li $v0, 4
+	la $a0, s0
+	syscall
+	li $v0, 1
+	move $a0, $s0
+	syscall
+	li $v0, 4
+	la $a0, s1
+	syscall
+	li $v0, 1
+	move $a0, $s1
+	syscall	
+	jr $ra
 
 temp:
 move $t0, $s0
