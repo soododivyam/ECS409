@@ -4,6 +4,6 @@ Repo to store all the code and stuff I write as part of my ECS409 Computer Organ
 Most of the code is from the assignments that sir gives.
 
 
-#How the assigments map to names
+## How the assigments map to names
 - assignment 7 is the stack one
 - assignment 6 is the functions one
