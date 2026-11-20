@@ -1,13 +1,10 @@
-# Use .set noreorder to prevent the assembler from filling branch
-# delay slots, if you want to fill delay slots manually.
-# .set noreorder
-.data 
+.data
 input: .asciiz "Please enter your 10 numbers starting now:"
 success: .asciiz "We now have the 10 numbers stored: "
 reverse: .asciiz "In reverse order: "
 
 .text
-.global _start
+#.global _start
 _start:
 main:
 	li $v0, 4
@@ -34,7 +31,7 @@ main:
 	syscall
 	#Now if I make the stack pointer point to the end, 
 	#and then $a1 is 4 I can print in reverse order
-	addi $sp, $sp, -40
+	addi $sp, $sp, -36
 	li $a1, 4
 	jal print
 	
